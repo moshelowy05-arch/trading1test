@@ -1,0 +1,129 @@
+{
+  "updated": "2026-10-01T05:40Z",
+  "package": "pmarb",
+  "python": "3.11 (uv)",
+  "run_from": "repository root (uv run locates the project from the cwd); elsewhere: uv run --project ~/prediction-arb pmarb ...",
+  "tests": {
+    "passing": 416,
+    "failing": 0,
+    "ruff": "clean",
+    "mypy_strict": "clean"
+  },
+  "phases": {
+    "1_repo_inspection": "done",
+    "2_research": "done",
+    "3_architecture_data_model": "done",
+    "4_market_data_adapters": "done_rest_only",
+    "5_normalization_matching": "done",
+    "6_fee_engine": "done",
+    "7_cross_venue_detector": "done",
+    "8_ladder_detector": "done_partitions_fixed_session4",
+    "9_collection_database": "done_recording",
+    "10_paper_trading": "done_running",
+    "11_execution_simulator": "done_review_fixes_session4",
+    "12_risk": "done",
+    "13_dashboard": "done_terminal_and_web",
+    "14_backtesting": "done_clipped_to_valid_data_since",
+    "15_shadow": "done_running",
+    "16_live_infra_disabled": "done_untested_against_venues",
+    "17_e2e_validation": "done_on_corrected_window",
+    "18_reviews": "done_including_session4_false_positive_review",
+    "19_traditional_arbitrage_step2": "done: within_game, multi_outcome, ladder_series, universe sweeps, classes, executable size, sync suite",
+    "20_remaining_gaps": "done: v2 template, cross_event family, Kalshi WS client (needs keys), 1 s in-play fast lane; Polymarket US WS not possible without keys/schema",
+    "21_statistical_research_study1_calibration": "harness built on branch research/calibration-study (CLI + docs); study not yet run"
+  },
+  "valid_data_since": "2026-09-29T19:03:22.774Z",
+  "final_backtest": {
+    "report": "docs/research/backtest_20260930T004437Z.md",
+    "window": "2026-09-29 19:03:22Z → 2026-09-30 00:22:18Z",
+    "hours": 5.315,
+    "strategy_a_us": {
+      "fresh_samples": 7432,
+      "net_positive_samples_at_10": 2,
+      "net_positive_note": "one instant (00:16:08Z, CWS@HOU last inning), +0.3c/contract, $0.03 at 10 contracts, below min_net_profit",
+      "excluded_frozen_in_play": 170,
+      "excluded_frozen_would_be_net_positive_at_10": 27
+    },
+    "strategy_b": {
+      "nested_checks": 873640,
+      "nested_gross_positive": 0,
+      "partition_states": 4722,
+      "partition_net_positive": 0
+    },
+    "replay_locked_pnl": "0.00 in 10 of 11 scenarios; -0.24 with hedge_buffer 0",
+    "replay_executions_with_fills_base": 0
+  },
+  "paper_shadow_after_corrected_model": {
+    "executions_per_mode": 32,
+    "executions_with_fills": 1,
+    "locked_pnl_per_mode": "-1.12"
+  },
+  "live_trading": "disabled (must remain disabled: no demonstrated arbitrage)",
+  "background_processes": {
+    "pipeline": "PMARB_CONFIG=config/paper_research.toml uv run pmarb run --headless --modes paper,shadow (restarted 2026-09-30T06:21:10Z: six families, universe sweeps, 1 s in-play fast lane; WS off without keys)"
+  },
+  "blockers": [
+    "No authenticated real-time data: public Polymarket US feed is CDN-cached (mean 19.7 s) and can be frozen at source in-play",
+    "No Kalshi / Polymarket US API keys: REST polling only, no WebSockets, live gateways untested",
+    "Polymarket international not tradable for US/NJ persons (research data only)",
+    "Polymarket US NJ eligibility unverified; Kalshi NJ status subject to pending SCOTUS petition"
+  ],
+  "next_actions": [
+    "Keep live trading disabled",
+    "Run the calibration study per docs/OPERATIONS.md (user checkpoints: window, fitted trading rule, each unseal)",
+    "Coverage: multi-outcome events (futures/awards/elections) buy-every-outcome scan; all events per ladder series",
+    "Authenticated WebSockets once API keys exist; settle whether frozen in-play Polymarket US books are paused or executable",
+    "Weeks of shadow mode across sports and game states; re-run backtests on the growing corrected window",
+    "Remaining open items in docs/LIMITATIONS.md"
+  ],
+  "findings": [
+    "Zero demonstrated arbitrage in either strategy on corrected data",
+    "27 of 29 would-be net-positive cross-venue samples were on Polymarket US books frozen at source in-play; the other 2 are one $0.03 instant",
+    "Ladder violations were snapshot-timing artifacts; partition ladders never fee-positive",
+    "Pre-19:03Z paper P&L invalidated; pre-fix maker P&L came from a simulator bug",
+    "Step 2: 0 of 491 live-confirmed universe candidates survived fees (one-tick overrounds)"
+  ],
+  "within_game_relations": {
+    "report": "docs/research/GAME_RELATIONS.md",
+    "constructions": 8775,
+    "strict_checks": 480000,
+    "net_positive_samples": 3,
+    "best_net_per_contract": "0.005",
+    "verdict": "one-tick gaps only; economically negligible"
+  },
+  "step2_coverage": {
+    "report": "docs/research/COVERAGE.md",
+    "sweeps": 7,
+    "markets_per_sweep": 121458,
+    "events_per_sweep": 12717,
+    "relationships_screened_per_sweep": 1939978,
+    "screen_candidates": 495,
+    "confirmed": 491,
+    "surviving_fees": 0,
+    "best_confirmed_net_per_set": "-0.0012",
+    "backtest": "docs/research/backtest_20260930T054908Z.md",
+    "replay_fills_all_scenarios": 0,
+    "verdict": "hard taker arbitrage effectively exhausted on public Kalshi data"
+  },
+  "statistical_research": {
+    "phase": "Statistical research, study 1 (calibration)",
+    "status": "harness built; study not yet run (nothing fetched, built or unsealed; no results exist)",
+    "branch": "research/calibration-study (not merged)",
+    "spec": "docs/superpowers/specs/2026-09-30-statistical-research-calibration-design.md",
+    "preregistrations": ["research/prereg/calibration_v1.toml", "research/prereg/calibration_trade_v1.toml"],
+    "command": "uv run pmarb research <fetch-listing|window|sample|fetch-meta|fetch-candles|fetch-prints|build|describe|fit-trade|freeze|validate-trade|unseal>",
+    "runbook": "docs/OPERATIONS.md (Statistical research phase)",
+    "limitations": "docs/LIMITATIONS.md (Statistical research phase)",
+    "tests": {"total_passing": 416, "research_unit": 164},
+    "optional_dependency": "numpy via `uv sync --extra research` (never in the live dependencies)",
+    "trades": false
+  },
+  "remaining_gaps": {
+    "cross_event_pairs_per_sweep": 45,
+    "first_confirmed_survivor": "SCFI >=5000 vs >5000: +$0.04, bounded, persistent",
+    "v2_rungs_in_ladders": 54472,
+    "v2_outlier_rungs": 322,
+    "kalshi_ws": "ready; needs operator read-only keys (KALSHI_API_KEY_ID, KALSHI_PRIVATE_KEY_PATH) + [collector].kalshi_ws_enabled",
+    "polymarket_us_ws": "not implemented: keys, NJ eligibility and verified schema required"
+  }
+}
