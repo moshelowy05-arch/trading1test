@@ -12,7 +12,7 @@ Re-run with --force a few days later to replace estimated marks with official re
 Timing: day D is scored once files through D+MARK_DAYS (default 3) exist on S3 (Kalshi publishes each day about a
 day later), so the newest scored day lags about four days.
 
-FROZEN RULES (Study 2 draft, handoffs/2026-10-02/study2_model_b_prereg_DRAFT.md):
+RULES (the same rules the live pilot uses; see handoffs/2026-10-02/model_b_pilot_plan.md):
   - Per market, one YES bid at 3c and one NO bid at 3c (= YES ask 97c), 100 contracts each, held to settlement.
   - A side is eligible while the market's prior-600 s volume-weighted price is 20-80c with >= 3 trade-seconds; fills
     are counted only while eligible (i.e. orders are assumed cancelled when a market leaves 20-80c).

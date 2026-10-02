@@ -35,10 +35,11 @@ re-score with official results on the Mac (handoffs/2026-10-02/model_b_forward.p
 3. When the runner reports "Checkpoint 2", show the fitted trading rule and wait for the user's approval before
    freezing. Ask again before unsealing. Before unsealing, verify the fee model (centicent rounding from 2026-05-28,
    per-series M, the 2026-07-03 index change, combo maker fees) and sub-cent price handling.
-4. Model B as Study 2: freeze its rules and forward-score each new S3 day (cloud, keyless), especially after
-   2026-10-13 (the VIP ends). Run `uv run python handoffs/2026-10-02/deep_book_probe.py` on the Mac now and weekly.
-5. User decisions pending: API keys (self-serve, read-only first), an always-on server, a CPA opinion, and later
-   whether to run a tiny live probe. Live trading stays disabled until the user explicitly decides.
+4. Model B: first re-score Sept 23-30 with official settlements (`model_b_forward.py`), then keep scoring each new day
+   as a background record (not a gate). Run `uv run python handoffs/2026-10-02/deep_book_probe.py` once during the pilot.
+5. Moshe decided (2026-10-02) to run a small live pilot of Model B (about one week, $25-50; plan in
+   handoffs/2026-10-02/model_b_pilot_plan.md). He creates the API key and turns on live trading himself once the bot
+   passes a demo test. Taxes are his own matter.
 
 ## Previous handoffs
 - [2026-10-02 markets / market making / fat-finger / assumptions](handoffs/2026-10-02-markets-mm-fatfinger-assumptions.md)
