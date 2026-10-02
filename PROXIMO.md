@@ -10,6 +10,10 @@ unattended at ~4 requests/s; `scripts/research/overnight.sh` builds the dataset,
 fits the trading rule, then stops for the user. Nothing is frozen or unsealed yet. Live trading stays disabled.
 Detail in the [handoff of 2026-10-01](handoffs/2026-10-01.md).
 
+## HANDOFF 2026-10-02 → read handoffs/2026-10-02-HANDOFF.md first (local-session checklist, guardrails, road map)
+Important: all Model B dollar figures are provisional. About half rest on estimated (last-trade) settlement values;
+re-score with official results on the Mac (handoffs/2026-10-02/model_b_forward.py) before relying on them.
+
 ## Update 2026-10-02 (cloud session; see handoffs/2026-10-02-markets-mm-fatfinger-assumptions.md)
 - Every Kalshi trade for 8 days (public S3 tape, 102M trades) was censused. About 61% of premium ($290M/day) sits in
   categories the project never examined (15-min crypto, combos, lower-tier tennis, 15-min commodities).

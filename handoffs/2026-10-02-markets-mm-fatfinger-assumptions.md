@@ -1,5 +1,15 @@
 # All markets, market making, fat-finger fishing, and an assumption audit — 2026-10-02
 
+> **CORRECTION, added later on 2026-10-02.** All Model B dollar figures below are **provisional**.
+> - About half of the simulated profit in Sept 2026 was valued with an *estimated* settlement: the last trade price,
+>   not Kalshi's official result.
+> - That estimate is ambiguous when a market's final second holds several prices, because order within a second is not
+>   execution order. On 2026-09-26 it alone moved the day's result by about 20% ($3,612 vs $2,987).
+> - The settlement-proxy check in section 3 covered crypto-hourly and weather markets only, not the sports and
+>   15-minute markets where most Model B profit sits.
+> - Re-score with official settlement values (`handoffs/2026-10-02/model_b_forward.py` on the Mac) before relying on
+>   any figure. See `handoffs/2026-10-02-HANDOFF.md`.
+
 Written in a cloud session. Data comes from Kalshi's public S3 bucket (`reporting/trade_data_YYYY-MM-DD`), which has every trade on the exchange: price, size and time to the second, but no taker side and no order book. Nothing here placed an order or used an API key. Full assumption tree: [2026-10-02/assumption_tree.md](2026-10-02/assumption_tree.md). Read-only depth probe for the Mac: [2026-10-02/deep_book_probe.py](2026-10-02/deep_book_probe.py).
 
 **What changed versus the 2026-10-01 review:**
